@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/konva@8.3.14/konva.min.js"></script>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #ffffff;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="container"></div>
+    <script>
+      // var width = window.innerWidth;
+      // var height = window.innerHeight;
+      // var width = innerWidth;
+      // var height = innerHeight;
+      var width = 2000;
+      var height = 2000;
+
+
+      var stage = new Konva.Stage({
+        container: 'container',
+        width: width,
+        height: height,
+        draggable: true,
+      });
+
+      var layer = new Konva.Layer();
+      stage.add(layer);
+      stage.on('dragmove', () => {
+        
+        stage.x(Math.max(stage.x(), -1600));
+        stage.x(Math.min(stage.x(), 1600));
+
+        stage.y(Math.max(stage.y(), -1600));
+        stage.y(Math.min(stage.y(), 1600));
+      });
+
+      var WIDTH = (-1600, 1600);
+      var HEIGHT = (-1600, 1600);
+    //   var NUMBER = 200;
+
+      // function generateNode() {
+      //   return new Konva.Circle({
+      //     x: WIDTH * Math.random(),
+      //     y: HEIGHT * Math.random(),
+      //     radius: 50,
+      //     fill: 'random' ,
+      //     draggable: true,
+      //   //   stroke: 'black',
+      //   });
+      // }
+
+      // for (var i = 0; i < 10; i++) {
+      //   layer.add(generateNode());
+      // }
+
+      var purple_rock = new Image();
+      purple_rock.src = 'assets/rock.png';
+
+      var blue_rock = new Image();
+      blue_rock.src = 'assets/rock2.png';
+
+      var green_rock = new Image();
+      green_rock.src = 'assets/rock3.png';
+
+      var green_tree = new Image();
+      green_tree.src = 'assets/tree.png';
+
+      var red_tree = new Image();
+      red_tree.src = 'assets/tree2.png';
+
+      var blue_tree = new Image();
+      blue_tree.src = 'assets/tree4.png';
+
+      var blue_buddha = new Image();
+      blue_buddha.src = 'assets/buddha.png';
+
+      var pink_buddha = new Image();
+      pink_buddha.src = 'assets/buddha2.png';
+
+      var yellow_buddha = new Image();
+      yellow_buddha.src = 'assets/buddha3.png';
+
+      var red_stone = new Image();
+      red_stone.src = 'assets/stone.png';
+
+      var yellow_stone = new Image();
+      yellow_stone.src = 'assets/stone2.png';
+
+      var orange_stone = new Image();
+      orange_stone.src = 'assets/stone3.png';
+
+      var circle = new Image();
+      circle.src = 'assets/group9.png';
+
+      // TODO
+      var vertical = new Image();
+      vertical.src = 'assets/group8.png';
+
+      var horizontal = new Image();
+      horizontal.src = 'assets/group12.png';
+
+      loadZenGarden();
+
+      function loadZenGarden() {
+
+        // create rock struct that holds an img and an audio
+        var rock1 = {
+            'img': new Konva.Image({
+                  image: purple_rock,
+                  x: WIDTH * Math.random(),
+                  y: HEIGHT * Math.random(),
+                  width: 200,
+                  height: 100,
+                  draggable: true,
+              }),
+            'audio': new Audio('assets/someaudio.mp3'),
+            'isAudioPlaying': false,
+        }
+
+        var rock2 = {
+            'img': new Konva.Image({
+                  image: blue_rock,
+                  x: WIDTH * Math.random(),
+                  y: HEIGHT * Math.random(),
+                  width: 200,
+                  height: 100,
+                  draggable: true,
+              }),
+            'audio': new Audio('assets/rainsound.mp3'),
+            'isAudioPlaying': false,
+        }
+
+        var rock3 = {
+            'img': new Konva.Image({
+                  image: green_rock,
+                  x: WIDTH * Math.random(),
+                  y: HEIGHT * Math.random(),
+                  width: 100,
+                  height: 100,
+                  draggable: true,
+              }),
+            'audio': new Audio('assets/birdsound.mp3'),
+            'isAudioPlaying': false,
+        }
+
+        var tree1 = {
+            'img': new Konva.Image({
+                  image: green_tree,
+                  x: WIDTH * Math.random(),
+                  y: HEIGHT * Math.random(),
+                  width: 100,
+                  height: 100,
+                  draggable: true,
+              }),
+            'audio': new Audio('assets/Thunder.mp3'),
+            'isAudioPlaying': false,
+        }
+
+        var tree2 = {
+            'img': new Konva.Image({
+                  image: red_tree,
+                  x: WIDTH * Math.random(),
+                  y: HEIGHT * Math.random(),
+                  width: 100,
+                  height: 100,
+                  draggable: true,
+              }),
+            'audio': new Audio('assets/whitenoise.mp3'),
+            'isAudioPlaying': false,
+        }
+
+        var tree3 = {
+            'img': new Konva.Image({
+                  image: blue_tree,
+                  x: WIDTH * Math.random(),
+                  y: HEIGHT * Math.random(),
+                  width: 100,
+                  height: 100,
+                  draggable: true,
+              }),
+            'audio': new Audio('assets/snowwind.mp3'),
+            'isAudioPlaying': false,
+        }
+
+        var buddha1 = {
+            'img': new Konva.Image({
+                  image: blue_buddha,
+                  x: WIDTH * Math.random(),
+                  y: HEIGHT * Math.random(),
+                  width: 100,
+                  height: 125,
+                  draggable: true,
+              }),
+            'audio': new Audio('assets/evening.mp3'),
+            'isAudioPlaying': false,
+        }
+
+        var buddha2 = {
+            'img': new Konva.Image({
+                  image: pink_buddha,
+                  x: WIDTH * Math.random(),
+                  y: HEIGHT * Math.random(),
+                  width: 100,
+                  height: 125,
+                  draggable: true,
+              }),
+            'audio': new Audio('assets/tvsound.mp3'),
+            'isAudioPlaying': false,
+        }
+
+        var buddha3 = {
+            'img': new Konva.Image({
+                  image: yellow_buddha,
+                  x: WIDTH * Math.random(),
+                  y: HEIGHT * Math.random(),
+                  width: 100,
+                  height: 125,
+                  draggable: true,
+              }),
+            'audio': new Audio('assets/summer.mp3'),
+            'isAudioPlaying': false,
+        }
+
+        var stone1 = {
+            'img': new Konva.Image({
+                  image: red_stone,
+                  x: WIDTH * Math.random(),
+                  y: HEIGHT * Math.random(),
+                  width: 100,
+                  height: 125,
+                  draggable: true,
+              }),
+            'audio': new Audio('assets/firepit.mp3'),
+            'isAudioPlaying': false,
+        }
+
+        var stone2 = {
+            'img': new Konva.Image({
+                  image: yellow_stone,
+                  x: WIDTH * Math.random(),
+                  y: HEIGHT * Math.random(),
+                  width: 100,
+                  height: 125,
+                  draggable: true,
+              }),
+            'audio': new Audio('assets/windchime.mp3'),
+            'isAudioPlaying': false,
+        }
+
+        var stone3 = {
+            'img': new Konva.Image({
+                  image: orange_stone,
+                  x: WIDTH * Math.random(),
+                  y: HEIGHT * Math.random(),
+                  width: 100,
+                  height: 100,
+                  draggable: true,
+              }),
+            'audio': new Audio('assets/oceanwave.mp3'),
+            'isAudioPlaying': false,
+        }
+
+        var vertical1 = {
+            'img': new Konva.Image({
+                  image: vertical,
+                  x: WIDTH * Math.random(),
+                  y: HEIGHT * Math.random(),
+                  // width: 200,
+                  // height: 100,
+                  draggable: true,
+              }),
+            // 'audio': new Audio('assets/someaudio.mp3'),
+            // 'isAudioPlaying': false,
+        }
+
+        var horizontal1 = {
+            'img': new Konva.Image({
+                  image: horizontal,
+                  x: WIDTH * Math.random(),
+                  y: HEIGHT * Math.random(),
+                  // width: 200,
+                  // height: 100,
+                  draggable: true,
+              }),
+            // 'audio': new Audio('assets/someaudio.mp3'),
+            // 'isAudioPlaying': false,
+        }
+
+        var circle1Img = new Konva.Image({
+          image: circle,
+          x: WIDTH * Math.random(),
+          y: HEIGHT * Math.random(),
+          // width: 100,
+          // height: 100,
+          draggable: true,
+        });
+
+        var circle2Img = new Konva.Image({
+          image: circle,
+          x: WIDTH * Math.random(),
+          y: HEIGHT * Math.random(),
+          // width: 100,
+          // height: 100,
+          draggable: true,
+        });
+
+        var circle3Img = new Konva.Image({
+          image: circle,
+          x: WIDTH * Math.random(),
+          y: HEIGHT * Math.random(),
+          // width: 100,
+          // height: 100,
+          draggable: true,
+        });
+
+        var circle4Img = new Konva.Image({
+          image: circle,
+          x: WIDTH * Math.random(),
+          y: HEIGHT * Math.random(),
+          // width: 100,
+          // height: 100,
+          draggable: true,
+        });
+
+      var groupCircle = [circle1Img, circle2Img, circle3Img, circle4Img]; 
+      var groupRock = [rock1, rock2, rock3]; 
+      var groupTree = [tree1, tree2, tree3]; 
+      var groupBuddha = [buddha1, buddha2, buddha3]; 
+      var groupStone = [stone1, stone2, stone3]; 
+
+      layer.add(vertical1.img, horizontal1.img, circle1Img, circle2Img, circle3Img, circle4Img, rock1.img, rock2.img, rock3.img, tree1.img, tree2.img, tree3.img, buddha1.img, buddha2.img, buddha3.img, stone1.img,stone2.img, stone3.img);
+      stage.add(layer);
+
+
+      
+      function isNearCenter(currRock, currImg) {
+        var currRockX = currRock.x();
+        var currRockY = currRock.y();
+        var currImgX = currImg.x();
+        var currImgY = currImg.y();
+
+        if (currImgX + 81 < currRockX && currRockX < currImgX + 255 && currImgY + 115 < currRockY && currRockY < currImgY + 225) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      function isNearCenter2(currTree, currImg) {
+        var currTreeX = currTree.x();
+        var currTreeY = currTree.y();
+        var currImgX = currImg.x();
+        var currImgY = currImg.y();
+
+        if (currImgX + 81 < currTreeX && currTreeX < currImgX + 255 && currImgY + 115 < currTreeY && currTreeY < currImgY + 225) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      function isNearCenter3(currBuddha, currImg) {
+        var currBuddhaX = currBuddha.x();
+        var currBuddhaY = currBuddha.y();
+        var currImgX = currImg.x();
+        var currImgY = currImg.y();
+
+        if (currImgX + 81 < currBuddhaX && currBuddhaX < currImgX + 255 && currImgY + 115 < currBuddhaY && currBuddhaY < currImgY + 225) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      function isNearCenter4(currStone, currImg) {
+        var currStoneX = currStone.x();
+        var currStoneY = currStone.y();
+        var currImgX = currImg.x();
+        var currImgY = currImg.y();
+
+        if (currImgX + 81 < currStoneX && currStoneX < currImgX + 255 && currImgY + 115 < currStoneY && currStoneY < currImgY + 225) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+
+      for(let i = 0; i < groupRock.length; i++) {
+        let currRock = groupRock[i];
+        currRock.img.on('dragend', function () {
+          for (let j = 0; j < groupCircle.length; j++) {
+            let currImg = groupCircle[j];
+          //   console.log(currImg);
+            if (isNearCenter(currRock.img, currImg)) {
+              console.log(currRock.audio);
+              currRock.audio.play();
+              currRock.isAudioPlaying = true;
+              // rock is in circle! break out of loop bc we don't care about the other circles
+              break;
+            } else if (currRock.isAudioPlaying ) {
+              currRock.audio.pause();
+              currRock.audio.currentTime = 0;
+              currRock.isAudioPlaying = false;
+            }
+          }
+      });
+    }
+
+      for(let i = 0; i < groupTree.length; i++) {
+        let currTree = groupTree[i];
+        currTree.img.on('dragend', function () {
+          for (let j = 0; j < groupCircle.length; j++) {
+            let currImg = groupCircle[j];
+          //   console.log(currImg);
+            if (isNearCenter(currTree.img, currImg)) {
+              console.log(currTree.audio);
+              currTree.audio.play();
+              currTree.isAudioPlaying = true;
+              // rock is in circle! break out of loop bc we don't care about the other circles
+              break;
+            } else if (currTree.isAudioPlaying ) {
+              currTree.audio.pause();
+              currTree.audio.currentTime = 0;
+              currTree.isAudioPlaying = false;
+            }
+          }
+      });
+    }
+
+    for(let i = 0; i < groupBuddha.length; i++) {
+        let currBuddha = groupBuddha[i];
+        currBuddha.img.on('dragend', function () {
+          for (let j = 0; j < groupCircle.length; j++) {
+            let currImg = groupCircle[j];
+          //   console.log(currImg);
+            if (isNearCenter(currBuddha.img, currImg)) {
+              console.log(currBuddha.audio);
+              currBuddha.audio.play();
+              currBuddha.isAudioPlaying = true;
+              // rock is in circle! break out of loop bc we don't care about the other circles
+              break;
+            } else if (currBuddha.isAudioPlaying ) {
+              currBuddha.audio.pause();
+              currBuddha.audio.currentTime = 0;
+              currBuddha.isAudioPlaying = false;
+            }
+          }
+      });
+    }
+
+    for(let i = 0; i < groupStone.length; i++) {
+        let currStone = groupStone[i];
+        currStone.img.on('dragend', function () {
+          for (let j = 0; j < groupCircle.length; j++) {
+            let currImg = groupCircle[j];
+          //   console.log(currImg);
+            if (isNearCenter(currStone.img, currImg)) {
+              console.log(currStone.audio);
+              currStone.audio.play();
+              currStone.isAudioPlaying = true;
+              // rock is in circle! break out of loop bc we don't care about the other circles
+              break;
+            } else if (currStone.isAudioPlaying ) {
+              currStone.audio.pause();
+              currStone.audio.currentTime = 0;
+              currStone.isAudioPlaying = false;
+            }
+          }
+      });
+    }
+    }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      // function drawImage() {
+
+      // // rock
+      // // var rockImg1 = new Konva.Image({
+      // //     image: rock,
+      // //     x: WIDTH * Math.random(),
+      // //     y: HEIGHT * Math.random(),
+      // //     width: 200,
+      // //     height: 100,
+      // //     draggable: true,
+      // //   });
+
+      // //   for (let i = 0; i < 4; i++) {
+      // //   var group9Img = new Konva.Image({
+      // //     image: group9,
+      // //     x: WIDTH * Math.random(),
+      // //     y: HEIGHT * Math.random(),
+      // //     // width: 100,
+      // //     // height: 100,
+      // //     draggable: true,
+      // //   });
+      // //   layer.add(group9Img);
+      // // }
+      //   // var group9Img = new Konva.Image({
+      //   //   image: group9,
+      //   //   x: WIDTH * Math.random(),
+      //   //   y: HEIGHT * Math.random(),
+      //   //   // width: 100,
+      //   //   // height: 100,
+      //   //   draggable: true,
+      //   // });
+
+      // //   function generateGroup9Img() {
+      // //   var group9Img = new Konva.Image({
+      // //     image: group9,
+      // //     x: WIDTH * Math.random(),
+      // //     y: HEIGHT * Math.random(),
+      // //     draggable: true,
+        
+      // //   });
+      // // }
+
+      // // for (var i = 0; i < 4; i++) {
+      // //   layer.add(group9Img);
+      // //   }
+
+      // var currentPlay = false;
+      // var audio = new Audio('assets/someaudio.mp3');
+
+      //       /*
+      //        * check if rockImg1 is in the right spot and
+      //        * snap into place if it is
+      //        */
+      //     //    var poistions = [i];
+      //     //    for (var i = 0; i < 5; i++) {
+      //     //     // var poistion = poistions[i];
+      //     //   rockImg1.on('dragend', function () {
+      //     //     if (isNearCenter(rockImg1, group9Img)) {
+      //     //       audio.play();
+      //     //       currentPlay = true;
+      //     //       rockImg1.inRightPlace = true;
+      //     //     } else if (currentPlay) {
+      //     //       audio.pause();
+      //     //       currentPlay = false;
+      //     //     }
+      //     //   });
+      //     // }
+
+
+      //       rockImg1.on('dragmove', function () {
+      //         document.body.style.cursor = 'pointer';
+      //       });
+
+
+
+      //   var rock2Img = new Konva.Image({
+      //     image: rock2,
+      //     x: WIDTH * Math.random(),
+      //     y: HEIGHT * Math.random(),
+      //     width: 100,
+      //     height: 50,
+      //     draggable: true,
+      //   });
+
+      //   var rock3Img = new Konva.Image({
+      //     image: rock3,
+      //     x: WIDTH * Math.random(),
+      //     y: HEIGHT * Math.random(),
+      //     width: 100,
+      //     height: 50,
+      //     draggable: true,
+      //   });
+
+      //   var treeImg = new Konva.Image({
+      //     image: tree,
+      //     x: WIDTH * Math.random(),
+      //     y: HEIGHT * Math.random(),
+      //     width: 150,
+      //     height: 150,
+      //     draggable: true,
+      //   });
+
+      //   var tree2Img = new Konva.Image({
+      //     image: tree2,
+      //     x: WIDTH * Math.random(),
+      //     y: HEIGHT * Math.random(),
+      //     width: 150,
+      //     height: 150,
+      //     draggable: true,
+      //   });
+
+      //   var tree3Img = new Konva.Image({
+      //     image: tree3,
+      //     x: WIDTH * Math.random(),
+      //     y: HEIGHT * Math.random(),
+      //     width: 150,
+      //     height: 150,
+      //     draggable: true,
+      //   });
+
+      //   var tree4Img = new Konva.Image({
+      //     image: tree4,
+      //     x: WIDTH * Math.random(),
+      //     y: HEIGHT * Math.random(),
+      //     width: 150,
+      //     height: 150,
+      //     draggable: true,
+      //   });
+
+
+      //   var buddhaImg = new Konva.Image({
+      //     image: buddha,
+      //     x: WIDTH * Math.random(),
+      //     y: HEIGHT * Math.random(),
+      //     width: 80,
+      //     height: 100,
+      //     draggable: true,
+      //   });
+
+      //   var buddha2Img = new Konva.Image({
+      //     image: buddha2,
+      //     x: WIDTH * Math.random(),
+      //     y: HEIGHT * Math.random(),
+      //     width: 80,
+      //     height: 100,
+      //     draggable: true,
+      //   });
+
+      //   var buddha3Img = new Konva.Image({
+      //     image: buddha3,
+      //     x: WIDTH * Math.random(),
+      //     y: HEIGHT * Math.random(),
+      //     width: 90,
+      //     height: 120,
+      //     draggable: true,
+      //   });
+
+      //   var stoneImg = new Konva.Image({
+      //     image: stone,
+      //     x: WIDTH * Math.random(),
+      //     y: HEIGHT * Math.random(),
+      //     width: 100,
+      //     height: 100,
+      //     draggable: true,
+      //   });
+
+      //   var stone2Img = new Konva.Image({
+      //     image: stone2,
+      //     x: WIDTH * Math.random(),
+      //     y: HEIGHT * Math.random(),
+      //     width: 100,
+      //     height: 100,
+      //     draggable: true,
+      //   });
+
+      //   var stone3Img = new Konva.Image({
+      //     image: stone3,
+      //     x: WIDTH * Math.random(),
+      //     y: HEIGHT * Math.random(),
+      //     width: 100,
+      //     height: 100,
+      //     draggable: true,
+      //   });
+
+      //   var group8Img = new Konva.Image({
+      //     image: group8,
+      //     x: WIDTH * Math.random(),
+      //     y: HEIGHT * Math.random(),
+      //     // width: 100,
+      //     // height: 100,
+      //     draggable: true,
+      //   });
+
+      //   var circle4Img = new Konva.Image({
+      //     image: group12,
+      //     x: WIDTH * Math.random(),
+      //     y: HEIGHT * Math.random(),
+      //     // width: 100,
+      //     // height: 100,
+      //     draggable: true,
+      //   });
+
+      //   var group9Img = new Konva.Image({
+      //     image: group9,
+      //     x: WIDTH * Math.random(),
+      //     y: HEIGHT * Math.random(),
+      //     // width: 100,
+      //     // height: 100,
+      //     draggable: true,
+      //   });
+
+      //   var circle1Img = new Konva.Image({
+      //     image: group10,
+      //     x: WIDTH * Math.random(),
+      //     y: HEIGHT * Math.random(),
+      //     // width: 100,
+      //     // height: 100,
+      //     draggable: true,
+      //   });
+
+      //   var circle3Img = new Konva.Image({
+      //     image: group11,
+      //     x: WIDTH * Math.random(),
+      //     y: HEIGHT * Math.random(),
+      //     // width: 100,
+      //     // height: 100,
+      //     draggable: true,
+      //   });
+
+      //   var group13Img = new Konva.Image({
+      //     image: group13,
+      //     x: WIDTH * Math.random(),
+      //     y: HEIGHT * Math.random(),
+      //     // width: 100,
+      //     // height: 100,
+      //     draggable: true,
+      //   });
+
+      
+      //   layer.add(group9Img,
+      //    rockImg1, rock2Img, rock3Img, treeImg, tree2Img, tree3Img, tree4Img, buddhaImg, buddha2Img, buddha3Img, stoneImg, stone2Img, stone3Img);
+      //   stage.add(layer);
+
+      //   // TODO: uncomment
+      //   // layer.add(group8Img, circle4Img, group9Img, circle1Img, circle3Img, group13Img,
+      //   //  rockImg1, rock2Img, rock3Img, treeImg, tree2Img, tree3Img, tree4Img, buddhaImg, buddha2Img, buddha3Img, stoneImg, stone2Img, stone3Img);
+      //   // stage.add(layer);
+      
+      
+      // }
+
+      // var tree= new Image();
+      // tree.onload = function () {
+      //   drawImage(this);
+      // };
+      // tree.src = 'assets/tree.png';
+
+      // var tree2 = new Image();
+      // tree2.src = 'assets/tree2.png';
+
+      // var tree3 = new Image();
+      // tree3.src = 'assets/tree3.png';
+
+      // var tree4 = new Image();
+      // tree4.src = 'assets/tree4.png';
+
+      // var buddha = new Image();
+      // buddha.src = 'assets/buddha.png';
+
+      // var buddha2 = new Image();
+      // buddha2.src = 'assets/buddha2.png';
+
+      // var buddha3 = new Image();
+      // buddha3.src = 'assets/buddha3.png';
+
+      // var stone = new Image();
+      // stone.src = 'assets/stone.png';
+
+      // var stone2 = new Image();
+      // stone2.src = 'assets/stone2.png';
+
+      // var stone3 = new Image();
+      // stone3.src = 'assets/stone3.png';
+
+    </script>
+  </body>
+</html>
